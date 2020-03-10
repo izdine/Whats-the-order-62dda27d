@@ -1,36 +1,37 @@
 USE `netland`;
--- 1. Welke series hebben een award hebben gewonnen?    
-SELECT title,has_won_awards
-FROM series
-WHERE has_won_awards  = 1;
--- 2. Welke series hebben een cijfer boven de 2.5?
-SELECT title,rating
+-- 1. Welke series, gesorteerd van hoogste cijfer naar laagste cijfer, hebben een cijfer boven de 2.5?
+SELECT title, rating
 FROM series
 WHERE rating >= 2.5;
--- 3. Welke series zijn in Nederland gemaakt én zijn Nederlands gesproken?
-SELECT title, country and (language)
+
+SELECT 
+title, rating
 FROM series
-WHERE country = 'NL' and language = 'NL' ;
--- 4. Welke series hebben minder dan 5 seizoenen?
-SELECT title,seasons
+ORDER BY 
+   title DESC, 
+   rating DESC ;
+-- 2. Welke series hebben minder dan 5 seizoenen, gesorteerd van minste aantal seizoenen naar meeste aantal seizoenen?
+SELECT title, seasons
 FROM series
-WHERE seasons >= 5;
--- 5. Wat is het hoogste cijfer dat een serie heeft?
-SELECT title,rating
-FROM series
-WHERE rating >= 5.0; 
--- 6. Welke series hebben minder dan 3 seizoenen of meer dan 20?
+WHERE seasons < 5;
+SELECT 
+title, seasons
+FROM 
+  series
+ORDER BY 
+title ASC, seasons ASC ;
+   
+-- 3. Welke series hebben minder dan 3 seizoenen of meer dan 20, gesorteerd op aantal seizoenen en land van herkomst?
 SELECT title, seasons
 FROM series
 WHERE seasons <= 2 or seasons >= 20 ;
--- 7. Welke series hebben de lettercombinatie 'Th' in hun title?
-SELECT title 
-FROM series
-WHERE title = 'th' ; 
--- 8. Welke series **niet** 3 seizoenen hebben?
-SELECT title, seasons
-FROM series
-WHERE seasons != 3;
+
+SELECT 
+	title, seasons
+FROM 
+   series
+ORDER BY 
+	title ASC, seasons ASC ;
 
 SELECT * FROM series;
 DESCRIBE series;
